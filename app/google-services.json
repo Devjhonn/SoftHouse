@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "643038966592",
+    "project_id": "agendamento-cc80d",
+    "storage_bucket": "agendamento-cc80d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643038966592:android:adbe583373a07d4544c0a5",
+        "android_client_info": {
+          "package_name": "com.example.agendamento"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB3PIAtgVsGAel4rD-IJKKgETu1spj17w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
