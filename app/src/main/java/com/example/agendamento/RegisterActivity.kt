@@ -118,11 +118,12 @@ class RegisterActivity : AppCompatActivity() {
         val nome = binding.edtNomeRegister.text.toString()
         val email = binding.edtEmailRegister.text.toString()
 
-        val db = FirebaseFirestore.getInstance()
+        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-        val usuarios = mutableMapOf<String, Any>()
-        usuarios["nome"] = nome
-        usuarios["E-mail"] = email
+        val usuarios = hashMapOf(
+            "nome" to nome,
+            "email" to email
+        )
 
         usuarioId = FirebaseAuth.getInstance().currentUser?.uid.toString()
 

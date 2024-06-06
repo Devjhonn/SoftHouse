@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.agendamento.databinding.ActivityHomeBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 
 class HomeActivity : AppCompatActivity() {
@@ -23,6 +24,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         val nome = intent.extras?.getString("nome")
+
+
         val calendario = binding.calendario
         calendario.setOnDateChangeListener { _, year, monthOfYear, dayOfMonth ->
 
@@ -74,6 +77,9 @@ class HomeActivity : AppCompatActivity() {
                 data.isEmpty() ->{
                     mensagem(it, "Escolha uma data!", cor = "#FF0000")
                 }
+                data.isNotEmpty() && hora.isNotEmpty() && hora > "8:00" && hora < "19:00" ->{
+                    salvarAgendamento(it,nome, data,hora)
+                }
             }
         }
 
@@ -92,6 +98,22 @@ class HomeActivity : AppCompatActivity() {
         snackbar.show()
     }
 
+
+    private fun salvarAgendamento(view: View, usuario: String?, data: String, hora: String){
+        val db = FirebaseFirestore.getInstance()
+
+        val dadosUsuario = hashMapOf(
+            "nome" to usuario,
+            "data" to data,
+            "hora" to hora
+        )
+
+        db.collection("agendamento").document(usuario.toString()).set(dadosUsuario).addOnCompleteListener{
+            mensagem(view, "Agendamento realizado com sucesso!", "#FF03DAC5")
+        }.addOnFailureListener{
+            mensagem(view, "Erro no servidor!", "FF0000")
+        }
+    }
 
 
 
